@@ -1,16 +1,21 @@
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
+#     "click",
 #     "qrcode[pil]",
 # ]
 # ///
 
+import click
 import qrcode
 
-def main():
-    url = "https://www.example.com"
+@click.command()
+@click.argument("url")
+def main(url):
+    output = "qrcode.png"
     img = qrcode.make(url)
-    img.save("qrcode.png")
+    img.save(output)
+    click.echo(f"QR code saved to {output}")
 
 if __name__ == "__main__":
     main()
